@@ -1,4 +1,4 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2013 The hktalent WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -255,7 +255,7 @@ func TestDialCookieJar(t *testing.T) {
 		u.Scheme = "https"
 	}
 
-	cookies := []*http.Cookie{{Name: "gorilla", Value: "ws", Path: "/"}}
+	cookies := []*http.Cookie{{Name: "hktalent", Value: "ws", Path: "/"}}
 	d.Jar.SetCookies(u, cookies)
 
 	ws, _, err := d.Dial(s.URL, nil)
@@ -264,18 +264,18 @@ func TestDialCookieJar(t *testing.T) {
 	}
 	defer ws.Close()
 
-	var gorilla string
+	var hktalent string
 	var sessionID string
 	for _, c := range d.Jar.Cookies(u) {
-		if c.Name == "gorilla" {
-			gorilla = c.Value
+		if c.Name == "hktalent" {
+			hktalent = c.Value
 		}
 
 		if c.Name == "sessionID" {
 			sessionID = c.Value
 		}
 	}
-	if gorilla != "ws" {
+	if hktalent != "ws" {
 		t.Error("Cookie not present in jar.")
 	}
 
