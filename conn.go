@@ -275,7 +275,7 @@ type Conn struct {
 	handlePong    func(string) error
 	handlePing    func(string) error
 	handleClose   func(int, string) error
-	readErrCount  int
+	ReadErrCount  int
 	messageReader *messageReader // the current low-level reader
 
 	readDecompress         bool // whether last read frame had RSV1 set
@@ -1025,8 +1025,8 @@ func (c *Conn) NextReader() (messageType int, r io.Reader, err error) {
 	// Applications that do handle the error returned from this method spin in
 	// tight loop on connection failure. To help application developers detect
 	// this error, panic on repeated reads to the failed connection.
-	c.readErrCount++
-	if c.readErrCount >= 1000 {
+	c.ReadErrCount++
+	if c.ReadErrCount >= 1000 {
 		panic("repeated read on failed websocket connection")
 	}
 
